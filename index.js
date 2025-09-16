@@ -38,6 +38,10 @@ app.ws('/active', (ws, req) => {
     });
 });
 
+app.get('/client', (req, res) => {
+    res.render('dynamic_websocket_page');
+});
+
 app.listen(port, () => {
     console.log(`WebSocket server listening at http://localhost:${port}`);
 });

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic WebSocket Page</title>
+</head>
+<body>
+    <h1>Dynamic WebSocket Client</h1>
+    <p>This page connects to a WebSocket server specified by the 'url' querystring parameter.</p>
+    <div id="messages"></div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const urlParams = new URLSearchParams(window.location.search);
+        const wsUrl = urlParams.get('url');
+
+        if (wsUrl) {
+            messagesDiv.innerHTML += `<p>Connecting to: <strong>${wsUrl}</strong></p>`;
+            try {
+                const ws = new WebSocket(wsUrl);
+
+                ws.onopen = () => {
+                    messagesDiv.innerHTML += '<p style="color: green;"><strong>Connection established!</strong></p>';
+                    ws.send('Hello from the dynamic client!');
+                };
+
+                ws.onmessage = (event) => {
+                    messagesDiv.innerHTML += `<p>Received: ${event.data}</p>`;
+                };
+
+                ws.onclose = () => {
+                    messagesDiv.innerHTML += '<p style="color: red;"><strong>Connection closed.</strong></p>';
+                };
+
+                ws.onerror = (error) => {
+                    console.error('WebSocket Error:', error);
+                    messagesDiv.innerHTML += '<p style="color: red;"><strong>An error occurred. Check the console.</strong></p>';
+                };
+            } catch (error) {
+                messagesDiv.innerHTML += `<p style="color: red;"><strong>Invalid WebSocket URL: ${wsUrl}</strong></p>`;
+                console.error('Invalid WebSocket URL:', error);
+            }
+        } else {
+            messagesDiv.innerHTML = '<p><strong>Error: No WebSocket URL provided.</strong> Please add a `?url=...` querystring parameter.';
+        }
+    </script>
+</body>
+</html>
