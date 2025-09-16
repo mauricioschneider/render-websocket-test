@@ -1,7 +1,13 @@
 const express = require('express');
 const expressWs = require('express-ws');
+const path = require('path');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+// Tell Express where the template files are located
+app.set('views', path.join(__dirname, 'views'));
+
 expressWs(app);
 
 const port = 3000;
@@ -39,7 +45,7 @@ app.ws('/active', (ws, req) => {
 });
 
 app.get('/client', (req, res) => {
-    res.render('dynamic_websocket_page');
+    res.render('client');
 });
 
 app.listen(port, () => {
