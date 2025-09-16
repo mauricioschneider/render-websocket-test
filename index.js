@@ -17,10 +17,10 @@ app.ws('/idle', (ws, req) => {
     const connectionTime = Date.now();
     console.log('Idle client connected');
 
-    ws.on('close', () => {
+    ws.on('close', (code, reason) => {
         const disconnectTime = Date.now();
         const duration = (disconnectTime - connectionTime) / 1000;
-        console.log(`Idle client disconnected. Connection lasted for ${duration.toFixed(2)} seconds.`);
+        console.log(`Idle client disconnected with code ${code}. Reason: ${reason}. Connection lasted for ${duration.toFixed(2)} seconds.`);
     });
 });
 
@@ -36,11 +36,11 @@ app.ws('/active', (ws, req) => {
         }
     }, 60000); // 60000 milliseconds = 1 minute
 
-    ws.on('close', () => {
+    ws.on('close', (code, reason) => {
         clearInterval(interval);
         const disconnectTime = Date.now();
         const duration = (disconnectTime - connectionTime) / 1000;
-        console.log(`Active client disconnected. Connection lasted for ${duration.toFixed(2)} seconds.`);
+        console.log(`Active client disconnected with code ${code}. Reason: ${reason}. Connection lasted for ${duration.toFixed(2)} seconds.`);
     });
 });
 
