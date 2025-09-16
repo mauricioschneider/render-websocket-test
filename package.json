@@ -1,0 +1,24 @@
+{
+  "name": "render-websocket-test",
+  "version": "0.0.1",
+  "description": "Test idle and active websockets timeouts",
+  "homepage": "https://github.com/mauricioschneider/render-websocket-test#readme",
+  "bugs": {
+    "url": "https://github.com/mauricioschneider/render-websocket-test/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricioschneider/render-websocket-test.git"
+  },
+  "license": "ISC",
+  "author": "Mauricio Schneider",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-ws": "^5.0.2"
+  }
+}
