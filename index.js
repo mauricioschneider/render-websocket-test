@@ -45,6 +45,10 @@ app.ws('/active', (ws, req) => {
 });
 
 app.get('/client', (req, res) => {
+    // Log headers in a human-readable JSON format
+    console.log('HTTP Headers for /client route (formatted JSON):');
+    console.log(JSON.stringify(req.headers, null, 2));
+    
     res.render('client');
 });
 
